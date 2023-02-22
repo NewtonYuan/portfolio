@@ -56,19 +56,19 @@ function App() {
             style={{
               backgroundImage: `url(${stars})`,
               backgroundSize: "cover",
-              opacity: 0.5,
-            }}
-          ></ParallaxLayer>
+            }}>
+              <div className="gradient-bg"></div>
+          </ParallaxLayer>
           <ParallaxLayer
-            offset={2}
+            offset={1}
             speed={1}
-            factor={4}
+            factor={3}
             style={{
               backgroundImage: `url(${ground})`,
               backgroundSize: "cover",
-              opacity: 0.5,
             }}
-          ></ParallaxLayer>
+          >
+          <div className="gradient-bg-2"></div></ParallaxLayer>
           <ParallaxLayer offset={0.2} speed={0.05}>
             <div className="flex flex-row px-[20%]">
               <div className="flex flex-col">

@@ -96,3 +96,15 @@
   width: calc(100% - 4px);
   z-index: 2;
 }
+
+.gradient-bg {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to bottom, rgba(20,20,20,0.5), rgba(20,20,20,1));
+}
+
+.gradient-bg-2 {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to bottom, rgba(20,20,20,1), rgba(20,20,20,0.5));
+}
