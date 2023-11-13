@@ -16,6 +16,8 @@
 :root {
   --bg-color: rgb(20, 20, 20);
   --card-color: rgb(23, 23, 23);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .App-header {
@@ -33,21 +35,24 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-container {
+  perspective: 1500px;
+  max-width: 1500px;
 }
 
 .card {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   cursor: pointer;
+  width: calc(100% / 3);
+  height: 380px;
   position: relative;
-  aspect-ratio: 1 / 1;
+  transition: transform 1500ms;
+  transform-style: preserve-3d;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
 }
 
 .card:hover::before,
@@ -87,24 +92,257 @@
   z-index: 1;
 }
 
-.card > .card-content {
+.card > .card-content,
+.card > .card-back {
   background-color: var(--card-color);
   border-radius: inherit;
   margin: 2px;
-  position: relative;
+  position: absolute;
   height: calc(100% - 4px);
   width: calc(100% - 4px);
   z-index: 2;
+  backface-visibility: hidden;
+}
+
+.card > .card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .gradient-bg {
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(to bottom, rgba(20,20,20,0.5), rgba(20,20,20,1));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(20, 20, 20, 0.5),
+    rgba(20, 20, 20, 1)
+  );
 }
 
 .gradient-bg-2 {
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(to bottom, rgba(20,20,20,1), rgba(20,20,20,0.5));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(20, 20, 20, 1),
+    rgba(20, 20, 20, 0.5)
+  );
+}
+
+.navbar {
+  position: fixed;
+}
+
+.navbar-scrolled {
+  background-color: gray;
+}
+
+.social-icon {
+  margin-left: 14px;
+}
+.social-icon a {
+  width: 42px;
+  height: 42px;
+  background: rgba(217, 217, 217, 0.1);
+  display: inline-flex;
+  border-radius: 50%;
+  margin-right: 6px;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.social-icon a::before {
+  content: "";
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 0.3s ease-in-out;
+}
+.social-icon a:hover::before {
+  transform: scale(1);
+}
+.social-icon a img {
+  width: 40%;
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+}
+
+.social-icon a:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%)
+    hue-rotate(346deg) brightness(95%) contrast(86%);
+}
+
+.download-cv button {
+  position: relative;
+  transition: 0.3s ease-in-out;
+}
+
+.download-cv button::before {
+  content: "";
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: 0.3s ease-in-out;
+}
+.download-cv button:hover {
+  color: #121212;
+}
+.download-cv button a {
+  transition: 0.3s ease-in-out;
+}
+.download-cv button:hover a {
+  color: #121212;
+}
+.download-cv button:hover::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.hamburger {
+  position: relative;
+  display: block;
+  width: 35px;
+  cursor: pointer;
+
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+}
+
+.hamburger .bar,
+.hamburger::after,
+.hamburger::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 5px;
+  background-color: #fff;
+  margin: 6px 0px;
+  transition: 0.4s;
+}
+
+.hamburger.is-active::before {
+  transform: rotate(-45deg) translate(-8px, 6px);
+}
+
+.hamburger.is-active .bar {
+  opacity: 0;
+}
+
+.hamburger.is-active::after {
+  transform: rotate(45deg) translate(-9px, -8px);
+}
+
+.arrow {
+  transform: rotate(-90deg);
+  transition: 0.4s;
+}
+
+.arrow.is-active {
+  transform: rotate(90deg);
+}
+
+.header-card {
+  height: 260px;
+  width: 180px;
+  background-color: white;
+  border-radius: 16px;
+}
+
+.header-card-content {
+  position: relative;
+  left: 3px;
+  top: 3px;
+  background-color: black;
+  height: 254px;
+  width: 174px;
+  border-radius: 16px;
+}
+
+.blob {
+  position: fixed;
+  background-color: white;
+  height: 500px;
+  aspect-ratio: 1;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: linear-gradient(to right, rgb(29, 163, 163), rgb(102, 13, 143));
+  animation: rotate 10s infinite;
+  z-index: -2;
+}
+
+.blur {
+  height: 200vh;
+  width: 200vw;
+  position: fixed;
+  z-index: -1;
+  backdrop-filter: blur(200px);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+@keyframes rotate {
+  from {
+    rotate: 0deg;
+  }
+
+  50% {
+    scale: 1 1.5;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+.slider-container {
+  margin: auto;
+}
+
+.slider {
+  overflow: hidden;
+  white-space: nowrap;
+  width: calc(100% - 60px);
+  margin-left: 30px;
+}
+
+.slider-item {
+  border: white 1px solid;
+  width: calc(100% / 3);
+  display: inline-block;
+  height: 380px;
+  margin-left: 14px;
+}
+
+.slider .slider-item:first-child {
+  margin-left: 0px;
+}
+
+@media screen and (max-width: 1400px) {
+  .slider-item {
+    width: calc(100% / 2);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .slider-item {
+    width: calc(100%);
+  }
 }

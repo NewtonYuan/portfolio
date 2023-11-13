@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: rgb(20, 20, 20)
+  --bg-color: rgb(20, 20, 20);
 }
 
 body {
   background-color: var(--bg-color);
+  height: auto;
+}
+
+html {
+  height: auto;
 }
