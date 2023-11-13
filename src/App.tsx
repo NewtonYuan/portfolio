@@ -328,81 +328,94 @@ function App() {
 
         {/* PROJECTS */}
         <div id="projects">
-          <div className="slider-container">
-            <img
-              src={carouselArrow}
-              alt="carousel arrow left"
-              className="rotate-180 brightness-50 invert w-12 relative top-[220px]"
-            />
-            <div className="slider">
-              <div className="slider-item">1</div>
-              <div className="slider-item">2</div>
-              <div className="slider-item">3</div>
-              <div className="slider-item">4</div>
-              <div className="slider-item">5</div>
-            </div>
-            <img
-              src={carouselArrow}
-              alt="carousel arrow left"
-              className="brightness-50 invert w-12 relative bottom-[210px] ml-auto"
-            />
-          </div>
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <span className="text-[54px] font-bold mt-[32rem]">Projects</span>
-            <div className="card-container mt-8 flex flex-row">
-              <div
-                className={`card rounded-[12px] ${
-                  cardOneFlipped ? "flipped" : ""
-                }`}
-                onClick={() => setCardOneFlipped(!cardOneFlipped)}
-              >
-                <div className="card-border"></div>
-                <div className="card-content py-8 px-10 flex flex-col">
-                  <span className="text-[28px] font-bold">
-                    Android Java Game
-                  </span>
-                  <span className="mt-4">
-                    Launched a mobile game (“3 Heroes”) available on the Google
-                    Play Store with 100+ downloads using Android Studio.
-                  </span>
+            <div className="slider-container">
+              <img
+                src={carouselArrow}
+                alt="carousel arrow left"
+                className="rotate-180 brightness-50 invert w-12 relative top-[220px]"
+              />
+              <div className="slider">
+                <div
+                  className={`card rounded-[12px] ${
+                    cardOneFlipped ? "flipped" : ""
+                  }`}
+                  onClick={() => setCardOneFlipped(!cardOneFlipped)}
+                >
+                  <div className="card-border"></div>
+                  <div className="card-content py-8 px-10 flex flex-col">
+                    <span className="text-[28px] font-bold">
+                      Android Java Game
+                    </span>
+                    <span className="mt-4">
+                      Launched a mobile game (“3 Heroes”) available on the
+                      Google Play Store with 100+ downloads using Android
+                      Studio.
+                    </span>
+                  </div>
+                  <div className="card-back">Back of card</div>
                 </div>
-                <div className="card-back">Back of card</div>
-              </div>
-              <div
-                className={`card rounded-[12px] ml-4 ${
-                  cardTwoFlipped ? "flipped" : ""
-                }`}
-                onClick={() => setCardTwoFlipped(!cardTwoFlipped)}
-              >
-                <div className="card-border"></div>
-                <div className="card-content py-8 px-10 flex flex-col">
-                  <span className="text-[28px] font-bold">Python Car AI</span>
-                  <span className="mt-4">
-                    Created a self-driving car that utilises Python’s OpenAI Gym
-                    and Q-Learning to help itself around any track.
-                  </span>
+                <div
+                  className={`card rounded-[12px] ml-4 ${
+                    cardTwoFlipped ? "flipped" : ""
+                  }`}
+                  onClick={() => setCardTwoFlipped(!cardTwoFlipped)}
+                >
+                  <div className="card-border"></div>
+                  <div className="card-content py-8 px-10 flex flex-col">
+                    <span className="text-[28px] font-bold">Python Car AI</span>
+                    <span className="mt-4">
+                      Created a self-driving car that utilises Python’s OpenAI
+                      Gym and Q-Learning to help itself around any track.
+                    </span>
+                  </div>
+                  <div className="card-back">Back of card</div>
                 </div>
-                <div className="card-back">Back of card</div>
-              </div>
-              <div
-                className={`card rounded-[12px] ml-4 ${
-                  cardThreeFlipped ? "flipped" : ""
-                }`}
-                onClick={() => setCardThreeFlipped(!cardThreeFlipped)}
-              >
-                <div className="card-border"></div>
-                <div className="card-content py-8 px-10 flex flex-col">
-                  <span className="text-[28px] font-bold">
-                    React TS Website
-                  </span>
-                  <span className="mt-4">
-                    Designed and built a personal portfolio website implementing
-                    features such as three.js, smooth-scrolling, animations,
-                    etc.
-                  </span>
+                <div
+                  className={`card rounded-[12px] ml-4 ${
+                    cardThreeFlipped ? "flipped" : ""
+                  }`}
+                  onClick={() => setCardThreeFlipped(!cardThreeFlipped)}
+                >
+                  <div className="card-border"></div>
+                  <div className="card-content py-8 px-10 flex flex-col">
+                    <span className="text-[28px] font-bold">
+                      React TS Website
+                    </span>
+                    <span className="mt-4">
+                      Designed and built a personal portfolio website
+                      implementing features such as three.js, smooth-scrolling,
+                      animations, etc.
+                    </span>
+                  </div>
+                  <div className="card-back">Back of card</div>
                 </div>
-                <div className="card-back">Back of card</div>
+                <div
+                  className={`card rounded-[12px] ml-4 ${
+                    cardThreeFlipped ? "flipped" : ""
+                  }`}
+                  onClick={() => setCardThreeFlipped(!cardThreeFlipped)}
+                >
+                  <div className="card-border"></div>
+                  <div className="card-content py-8 px-10 flex flex-col">
+                    <span className="text-[28px] font-bold">
+                      React TS Website
+                    </span>
+                    <span className="mt-4">
+                      Designed and built a personal portfolio website
+                      implementing features such as three.js, smooth-scrolling,
+                      animations, etc.
+                    </span>
+                  </div>
+                  <div className="card-back">Back of card</div>
+                </div>
               </div>
+              <img
+                src={carouselArrow}
+                alt="carousel arrow left"
+                className="brightness-50 invert w-12 relative bottom-[210px] ml-auto"
+              />
             </div>
           </div>
         </div>

@@ -44,11 +44,15 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   cursor: pointer;
-  width: calc(100% / 3);
   height: 380px;
   position: relative;
   transition: transform 1500ms;
   transform-style: preserve-3d;
+  width: calc(100% / 3);
+  display: inline-block;
+  height: 380px;
+  margin-left: 14px;
+  white-space: normal;
 }
 
 .card.flipped {
@@ -314,6 +318,8 @@
 
 .slider-container {
   margin: auto;
+  translate: -2.5%;
+  width: 105%;
 }
 
 .slider {
@@ -321,14 +327,7 @@
   white-space: nowrap;
   width: calc(100% - 60px);
   margin-left: 30px;
-}
-
-.slider-item {
-  border: white 1px solid;
-  width: calc(100% / 3);
-  display: inline-block;
-  height: 380px;
-  margin-left: 14px;
+  perspective: 3200px;
 }
 
 .slider .slider-item:first-child {
