@@ -45,7 +45,6 @@ function App() {
   const [cardOneFlipped, setCardOneFlipped] = useState(false);
   const [cardTwoFlipped, setCardTwoFlipped] = useState(false);
   const [cardThreeFlipped, setCardThreeFlipped] = useState(false);
-  const [cardFourFlipped, setCardFourFlipped] = useState(false);
 
   let dragStart = false,
     prevPageX: number,
