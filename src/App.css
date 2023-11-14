@@ -41,7 +41,7 @@
 }
 
 .card {
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   cursor: pointer;
@@ -334,7 +334,7 @@
   perspective: 3200px;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  -webkit-mask: linear-gradient(90deg,#0000,#000 25% 75%,#0000)
+  -webkit-mask: linear-gradient(90deg, #0000, #000 25% 75%, #0000);
 }
 
 .slider.no-transition {
@@ -343,7 +343,7 @@
 }
 
 .slider::-webkit-scrollbar {
-  display:none;
+  display: none;
 }
 
 .slider.dragging {
@@ -356,8 +356,22 @@
   margin-left: 0px;
 }
 
-.header-card-text {
-  -webkit-mask: linear-gradient(45deg,red,blue 25% 75%,blue);
+.magic {
+  animation: background-pan 2s linear infinite;
+  background: linear-gradient(to right, #ab50c9, #c16cc4, #f5c7ed, #ab50c9);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: -200% center;
+  }
 }
 
 @media screen and (max-width: 1400px) {

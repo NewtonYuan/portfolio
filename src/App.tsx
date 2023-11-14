@@ -7,7 +7,10 @@ import githubIcon from "./assets/img/github.png";
 import linkedinIcon from "./assets/img/linkedin.svg";
 import arrowIcon from "./assets/img/arrow.png";
 import carouselArrow from "./assets/img/carousel-arrow.png";
-import Carousel from "react-elastic-carousel";
+import javascript from "./assets/img/javascript.png";
+import python from "./assets/img/python.png";
+import java from "./assets/img/java.png";
+import c from "./assets/img/c.png";
 
 function Box() {
   return (
@@ -44,39 +47,48 @@ function App() {
   const [cardThreeFlipped, setCardThreeFlipped] = useState(false);
   const [cardFourFlipped, setCardFourFlipped] = useState(false);
 
-  let dragStart = false, prevPageX: number, prevScrollLeft: number;
+  let dragStart = false,
+    prevPageX: number,
+    prevScrollLeft: number;
 
   const carousel = document.querySelector(".slider");
   const leftArrow = document.querySelector(".slider-arrow-left");
   const rightArrow = document.querySelector(".slider-arrow-right");
   const firstCard = document.querySelectorAll(".card")[0];
 
-  if (carousel){
-    /*const carouselChildren = [...carousel!.children]
-    let cardPerView = Math.round(carousel!.clientWidth / firstCard.clientWidth)
-    carouselChildren.slice(-cardPerView).reverse().forEach(card => {
-      carousel!.insertAdjacentHTML("afterbegin", card.outerHTML)
-    })
-    carouselChildren.slice(0, cardPerView).forEach(card => {
-      carousel!.insertAdjacentHTML("beforeend", card.outerHTML)
-    })*/
+  if (carousel) {
+    const carouselChildren = [...carousel!.children];
+    let cardPerView = Math.round(carousel!.clientWidth / firstCard.clientWidth);
+    carouselChildren
+      .slice(-cardPerView)
+      .reverse()
+      .forEach((card) => {
+        carousel!.insertAdjacentHTML("afterbegin", card.outerHTML);
+      });
+    carouselChildren.slice(0, cardPerView).forEach((card) => {
+      carousel!.insertAdjacentHTML("beforeend", card.outerHTML);
+    });
 
-    leftArrow?.addEventListener("click", () => {carousel!.scrollLeft -= (firstCard.clientWidth) });
-    rightArrow?.addEventListener("click", () => {carousel!.scrollLeft += (firstCard.clientWidth)});
+    leftArrow?.addEventListener("click", () => {
+      carousel!.scrollLeft -= firstCard.clientWidth;
+    });
+    rightArrow?.addEventListener("click", () => {
+      carousel!.scrollLeft += firstCard.clientWidth;
+    });
 
     const startDrag = (e: any) => {
       dragStart = true;
       prevPageX = e.pageX;
       prevScrollLeft = carousel!.scrollLeft;
-    }
+    };
 
     const stopDrag = () => {
       dragStart = false;
       carousel?.classList.remove("dragging");
-    }
+    };
 
     const dragging = (e: any) => {
-      if(dragStart){
+      if (dragStart) {
         e.preventDefault();
         carousel?.classList.add("dragging");
         let positionDiff = e.pageX - prevPageX;
@@ -84,24 +96,25 @@ function App() {
       }
     };
 
-    /*
     const infiniteScroll = () => {
-      if(carousel.scrollLeft === 0) {
-        carousel.classList.add("no-transition")
-        carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.clientWidth);
-        carousel.classList.remove("no-transition")
-      } else if(Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.clientWidth) {
-        carousel.classList.add("no-transition")
+      if (carousel.scrollLeft === 0) {
+        carousel.classList.add("no-transition");
+        carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.clientWidth;
+        carousel.classList.remove("no-transition");
+      } else if (
+        Math.ceil(carousel.scrollLeft) ===
+        carousel.scrollWidth - carousel.clientWidth
+      ) {
+        carousel.classList.add("no-transition");
         carousel.scrollLeft = carousel.clientWidth;
-        carousel.classList.remove("no-transition")
+        carousel.classList.remove("no-transition");
       }
-    }
-    */
+    };
 
     carousel?.addEventListener("mousedown", startDrag);
     document?.addEventListener("mouseup", stopDrag);
     carousel?.addEventListener("mousemove", dragging);
-    //carousel.addEventListener("scroll", infiniteScroll);
+    carousel.addEventListener("scroll", infiniteScroll);
   }
 
   useEffect(() => {
@@ -336,7 +349,9 @@ function App() {
                     : "right-3 -rotate-6"
                 }`}
               >
-                <div className="header-card-content"></div>
+                <div className="header-card-content flex justify-center items-center">
+                  <img src={java} alt="java icon" className={`w-[60%]`} />
+                </div>
               </div>
               <div
                 className={`header-card relative -mt-64 top-3 duration-300 ${
@@ -345,7 +360,9 @@ function App() {
                     : "rotate-[8deg] left-3"
                 }`}
               >
-                <div className="header-card-content"></div>
+                <div className="header-card-content flex justify-center items-center">
+                  <img src={c} alt="c icon" className={`w-[60%]`} />
+                </div>
               </div>
               <div
                 className={`header-card relative -mt-64 top-2 duration-300 ${
@@ -354,10 +371,31 @@ function App() {
                     : "rotate-3 left-3"
                 }`}
               >
-                <div className="header-card-content"></div>
+                <div className="header-card-content flex justify-center items-center ">
+                  <img src={python} alt="python icon" className={`w-[60%]`} />
+                </div>
               </div>
               <div className="header-card relative -mt-64 z-10">
-                <div className="header-card-content text-white text-center flex flex-col justify-center items-center text-3xl font-bold"><p>Hover</p><p className="header-card-text">Me!</p></div>
+                <div className="header-card-content text-white text-center flex flex-col justify-center items-center text-2xl font-bold">
+                  <img
+                    src={javascript}
+                    alt="javascript icon"
+                    className={`relative ease-in-out duration-300 ${
+                      headerCardsHovered
+                        ? "translate-y-8"
+                        : "-translate-y-24 opacity-0"
+                    }`}
+                  />
+                  <p
+                    className={`relative ease-in-out duration-300 bottom-12 ${
+                      headerCardsHovered ? "opacity-0" : ""
+                    }`}
+                  >
+                    Hover
+                    <br />
+                    <span className={`magic text-4xl font-bold`}>ME</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -379,10 +417,10 @@ function App() {
         </div>
 
         {/* PROJECTS */}
-        <div id="projects">
+        <div id="projects" className="mt-[48rem]">
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <span className="text-[54px] font-bold mt-[32rem]">Projects</span>
-            <div className="slider-container">
+            <div className="slider-container transition ease-in-out delay-150">
               <img
                 src={carouselArrow}
                 alt="carousel arrow left"
@@ -490,7 +528,8 @@ function App() {
             </div>
           </div>
         </div>
-        <div id="contact">
+
+        <div id="contact" className="mt-[48rem]">
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <span className="text-[54px] font-bold mt-[24rem]">Contact</span>
             <div className="w-2/3 mt-8">
