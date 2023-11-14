@@ -44,13 +44,65 @@ function App() {
   const [cardThreeFlipped, setCardThreeFlipped] = useState(false);
   const [cardFourFlipped, setCardFourFlipped] = useState(false);
 
+  let dragStart = false, prevPageX: number, prevScrollLeft: number;
+
   const carousel = document.querySelector(".slider");
+  const leftArrow = document.querySelector(".slider-arrow-left");
+  const rightArrow = document.querySelector(".slider-arrow-right");
+  const firstCard = document.querySelectorAll(".card")[0];
 
-  const dragging = (e: any) => {
-    carousel!.scrollLeft = e.pageX;
-  };
+  if (carousel){
+    /*const carouselChildren = [...carousel!.children]
+    let cardPerView = Math.round(carousel!.clientWidth / firstCard.clientWidth)
+    carouselChildren.slice(-cardPerView).reverse().forEach(card => {
+      carousel!.insertAdjacentHTML("afterbegin", card.outerHTML)
+    })
+    carouselChildren.slice(0, cardPerView).forEach(card => {
+      carousel!.insertAdjacentHTML("beforeend", card.outerHTML)
+    })*/
 
-  carousel?.addEventListener("mousemove", dragging);
+    leftArrow?.addEventListener("click", () => {carousel!.scrollLeft -= (firstCard.clientWidth) });
+    rightArrow?.addEventListener("click", () => {carousel!.scrollLeft += (firstCard.clientWidth)});
+
+    const startDrag = (e: any) => {
+      dragStart = true;
+      prevPageX = e.pageX;
+      prevScrollLeft = carousel!.scrollLeft;
+    }
+
+    const stopDrag = () => {
+      dragStart = false;
+      carousel?.classList.remove("dragging");
+    }
+
+    const dragging = (e: any) => {
+      if(dragStart){
+        e.preventDefault();
+        carousel?.classList.add("dragging");
+        let positionDiff = e.pageX - prevPageX;
+        carousel!.scrollLeft = prevScrollLeft - positionDiff;
+      }
+    };
+
+    /*
+    const infiniteScroll = () => {
+      if(carousel.scrollLeft === 0) {
+        carousel.classList.add("no-transition")
+        carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.clientWidth);
+        carousel.classList.remove("no-transition")
+      } else if(Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.clientWidth) {
+        carousel.classList.add("no-transition")
+        carousel.scrollLeft = carousel.clientWidth;
+        carousel.classList.remove("no-transition")
+      }
+    }
+    */
+
+    carousel?.addEventListener("mousedown", startDrag);
+    document?.addEventListener("mouseup", stopDrag);
+    carousel?.addEventListener("mousemove", dragging);
+    //carousel.addEventListener("scroll", infiniteScroll);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -305,7 +357,7 @@ function App() {
                 <div className="header-card-content"></div>
               </div>
               <div className="header-card relative -mt-64 z-10">
-                <div className="header-card-content"></div>
+                <div className="header-card-content text-white text-center flex flex-col justify-center items-center text-3xl font-bold"><p>Hover</p><p className="header-card-text">Me!</p></div>
               </div>
             </div>
           </div>
@@ -334,7 +386,7 @@ function App() {
               <img
                 src={carouselArrow}
                 alt="carousel arrow left"
-                className="rotate-180 brightness-50 invert w-12 relative top-[220px]"
+                className="rotate-180 brightness-50 invert w-12 relative top-[220px] left-[10%] slider-arrow-left z-20"
               />
               <div className="slider">
                 <div
@@ -410,11 +462,30 @@ function App() {
                   </div>
                   <div className="card-back">Back of card</div>
                 </div>
+                <div
+                  className={`card rounded-[12px] ml-4 ${
+                    cardThreeFlipped ? "flipped" : ""
+                  }`}
+                  onClick={() => setCardThreeFlipped(!cardThreeFlipped)}
+                >
+                  <div className="card-border"></div>
+                  <div className="card-content py-8 px-10 flex flex-col">
+                    <span className="text-[28px] font-bold">
+                      React TS Website
+                    </span>
+                    <span className="mt-4">
+                      Designed and built a personal portfolio website
+                      implementing features such as three.js, smooth-scrolling,
+                      animations, etc.
+                    </span>
+                  </div>
+                  <div className="card-back">Back of card</div>
+                </div>
               </div>
               <img
                 src={carouselArrow}
                 alt="carousel arrow left"
-                className="brightness-50 invert w-12 relative bottom-[210px] ml-auto"
+                className="brightness-50 invert w-12 relative bottom-[214px] ml-auto right-[10%] slider-arrow-right"
               />
             </div>
           </div>
