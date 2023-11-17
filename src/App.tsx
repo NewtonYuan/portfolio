@@ -39,6 +39,7 @@ const SocialIcons = () => {
 };
 
 function App() {
+  var windowWidth = window.innerWidth;
   const [scrolled, setScrolled] = useState(false);
   const [hamburgerIsActive, setHamburgerIsActive] = useState(false);
   const [headerCardsHovered, setHeaderCardsHovered] = useState(false);
@@ -46,10 +47,14 @@ function App() {
   const [cardTwoFlipped, setCardTwoFlipped] = useState(false);
   const [cardThreeFlipped, setCardThreeFlipped] = useState(false);
 
+  const onResize = () => {
+    windowWidth = window.innerWidth
+  }
+  window.addEventListener("resize", onResize)
+
   let dragStart = false,
     prevPageX: number,
     prevScrollLeft: number;
-
   const carousel = document.querySelector(".slider");
   const leftArrow = document.querySelector(".slider-arrow-left");
   const rightArrow = document.querySelector(".slider-arrow-right");
@@ -160,7 +165,7 @@ function App() {
 
   const handleMouseMove = (e: MouseEvent) => {
     const blob = document.getElementById("blob");
-    if (blob !== null) {
+    if (blob !== null && windowWidth >= 1024) {
       blob.animate(
         {
           left: `${e.clientX}px`,
@@ -531,7 +536,7 @@ function App() {
         <div id="contact" className="mt-[48rem]">
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <span className="text-[54px] font-bold mt-[24rem]">Contact</span>
-            <div className="w-2/3 mt-8">
+            <div className="w-full lg:w-2/3 mt-8">
               <div className="flex flex-row">
                 <input
                   type="text"
@@ -547,19 +552,23 @@ function App() {
                 ></input>
               </div>
               <div>
-                <input
-                  type="text"
+                <textarea
                   placeholder="Message"
                   name="message"
                   className="mt-4 h-[120px] w-full text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
-                ></input>
+                ></textarea>
               </div>
+                  <div className="mt-4 download-cv relative duration-500 h-[80%]">
+                    <button className="border py-3 px-12 text-white font-bold text-[18px] z-10">
+                      Send
+                    </button>
+                  </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="text-center mb-10 z-50">
-        Copyright 2022. All Rights Reserved
+      <div className="text-center py-10 z-50 mt-[14rem] text-white opacity-80">
+        Copyright 2022. All Rights Reserved. Made by Newton Yuan.
       </div>
     </div>
   );
