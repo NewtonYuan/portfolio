@@ -54,7 +54,7 @@
   height: 380px;
   margin-left: 14px;
   white-space: normal;
-  max-width: 320px;
+  max-width: 300px;
 }
 
 .card.flipped {
@@ -320,8 +320,28 @@
 
 .slider-container {
   margin: auto;
-  translate: -12%;
-  width: 136%;
+  translate: -1%;
+  width: 102%;
+}
+
+.max-5 {
+  max-width: 1620px;
+}
+
+.max-4 {
+  max-width: 1296px;
+}
+
+.max-3 {
+  max-width: 996px;
+}
+
+.max-2 {
+  max-width: 664px;
+}
+
+.max-1 {
+  max-width: 332px;
 }
 
 .slider {
@@ -334,7 +354,6 @@
   perspective: 3200px;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  -webkit-mask: linear-gradient(90deg, #0000, #000 25% 75%, #0000);
 }
 
 .slider.no-transition {
@@ -382,6 +401,6 @@
 
 @media screen and (max-width: 768px) {
   .card {
-    width: calc(80%);
+    width: calc(100%);
   }
 }

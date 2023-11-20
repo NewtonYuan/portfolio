@@ -39,6 +39,7 @@ const SocialIcons = () => {
 };
 
 function App() {
+  let sizeClasses = ["max-1", "max-2", "max-3", "max-4", "max-5"];
   var windowWidth = window.innerWidth;
   const [scrolled, setScrolled] = useState(false);
   const [hamburgerIsActive, setHamburgerIsActive] = useState(false);
@@ -47,31 +48,37 @@ function App() {
   const [cardTwoFlipped, setCardTwoFlipped] = useState(false);
   const [cardThreeFlipped, setCardThreeFlipped] = useState(false);
 
-  const onResize = () => {
-    windowWidth = window.innerWidth
-  }
-  window.addEventListener("resize", onResize)
-
   let dragStart = false,
     prevPageX: number,
     prevScrollLeft: number;
   const carousel = document.querySelector(".slider");
+  const sliderContainer = document.querySelector(".slider-container");
   const leftArrow = document.querySelector(".slider-arrow-left");
   const rightArrow = document.querySelector(".slider-arrow-right");
   const firstCard = document.querySelectorAll(".card")[0];
 
   if (carousel) {
-    const carouselChildren = [...carousel!.children];
-    let cardPerView = Math.round(carousel!.clientWidth / firstCard.clientWidth);
-    carouselChildren
-      .slice(-1)
-      .reverse()
-      .forEach((card) => {
-        carousel!.insertAdjacentHTML("afterbegin", card.outerHTML);
+    let cardPerView = Math.floor(carousel!.clientWidth / firstCard.clientWidth);
+    const onResize = () => {
+      windowWidth = window.innerWidth;
+      cardPerView = Math.floor(carousel!.clientWidth / firstCard.clientWidth);
+      console.log(cardPerView);
+      sizeClasses.forEach((size) => {
+        sliderContainer?.classList.remove(size);
       });
-    carouselChildren.slice(0, 1).forEach((card) => {
-      carousel!.insertAdjacentHTML("beforeend", card.outerHTML);
-    });
+      if (cardPerView <= 1) {
+        sliderContainer?.classList.add("max-1");
+      } else if (cardPerView === 2) {
+        sliderContainer?.classList.add("max-2");
+      } else if (cardPerView === 3) {
+        sliderContainer?.classList.add("max-3");
+      } else if (cardPerView === 4) {
+        sliderContainer?.classList.add("max-4");
+      } else if (cardPerView >= 5) {
+        sliderContainer?.classList.add("max-5");
+      }
+    };
+    window.addEventListener("resize", onResize);
 
     leftArrow?.addEventListener("click", () => {
       carousel!.scrollLeft -= firstCard.clientWidth;
@@ -100,25 +107,9 @@ function App() {
       }
     };
 
-    const infiniteScroll = () => {
-      if (carousel.scrollLeft === 0) {
-        carousel.classList.add("no-transition");
-        carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.clientWidth;
-        carousel.classList.remove("no-transition");
-      } else if (
-        Math.ceil(carousel.scrollLeft) ===
-        carousel.scrollWidth - carousel.clientWidth
-      ) {
-        carousel.classList.add("no-transition");
-        carousel.scrollLeft = carousel.clientWidth;
-        carousel.classList.remove("no-transition");
-      }
-    };
-
     carousel?.addEventListener("mousedown", startDrag);
     document?.addEventListener("mouseup", stopDrag);
     carousel?.addEventListener("mousemove", dragging);
-    carousel.addEventListener("scroll", infiniteScroll);
   }
 
   useEffect(() => {
@@ -428,7 +419,7 @@ function App() {
               <img
                 src={carouselArrow}
                 alt="carousel arrow left"
-                className="rotate-180 brightness-50 invert w-12 relative top-[220px] left-[10%] slider-arrow-left z-20"
+                className="rotate-180 brightness-50 invert w-12 relative top-[220px] slider-arrow-left z-20"
               />
               <div className="slider">
                 <div
@@ -527,7 +518,7 @@ function App() {
               <img
                 src={carouselArrow}
                 alt="carousel arrow left"
-                className="brightness-50 invert w-12 relative bottom-[214px] ml-auto right-[10%] slider-arrow-right"
+                className="brightness-50 invert w-12 relative bottom-[214px] ml-auto slider-arrow-right"
               />
             </div>
           </div>
@@ -558,11 +549,11 @@ function App() {
                   className="mt-4 h-[120px] w-full text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
                 ></textarea>
               </div>
-                  <div className="mt-4 download-cv relative duration-500 h-[80%]">
-                    <button className="border py-3 px-12 text-white font-bold text-[18px] z-10">
-                      Send
-                    </button>
-                  </div>
+              <div className="mt-4 download-cv relative duration-500 h-[80%]">
+                <button className="border py-3 px-12 text-white font-bold text-[18px] z-10">
+                  Send
+                </button>
+              </div>
             </div>
           </div>
         </div>
