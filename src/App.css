@@ -106,7 +106,7 @@
   position: absolute;
   height: calc(100% - 4px);
   width: calc(100% - 4px);
-  z-index: 2;
+  z-index: 5;
   backface-visibility: hidden;
 }
 

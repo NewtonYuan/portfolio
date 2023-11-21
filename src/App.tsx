@@ -39,7 +39,6 @@ const SocialIcons = () => {
 };
 
 function App() {
-  let sizeClasses = ["max-1", "max-2", "max-3", "max-4", "max-5"];
   var windowWidth = window.innerWidth;
   const [scrolled, setScrolled] = useState(false);
   const [hamburgerIsActive, setHamburgerIsActive] = useState(false);
@@ -47,39 +46,20 @@ function App() {
   const [cardOneFlipped, setCardOneFlipped] = useState(false);
   const [cardTwoFlipped, setCardTwoFlipped] = useState(false);
   const [cardThreeFlipped, setCardThreeFlipped] = useState(false);
+  const [cardFourFlipped, setCardFourFlipped] = useState(false);
+  const [cardFiveFlipped, setCardFiveFlipped] = useState(false);
+  const [cardSixFlipped, setCardSixFlipped] = useState(false);
+  const [firstTimeFlipped, setFirstTimeFlipped] = useState(false);
 
   let dragStart = false,
     prevPageX: number,
     prevScrollLeft: number;
   const carousel = document.querySelector(".slider");
-  const sliderContainer = document.querySelector(".slider-container");
   const leftArrow = document.querySelector(".slider-arrow-left");
   const rightArrow = document.querySelector(".slider-arrow-right");
   const firstCard = document.querySelectorAll(".card")[0];
 
   if (carousel) {
-    let cardPerView = Math.floor(carousel!.clientWidth / firstCard.clientWidth);
-    const onResize = () => {
-      windowWidth = window.innerWidth;
-      cardPerView = Math.floor(carousel!.clientWidth / firstCard.clientWidth);
-      console.log(cardPerView);
-      sizeClasses.forEach((size) => {
-        sliderContainer?.classList.remove(size);
-      });
-      if (cardPerView <= 1) {
-        sliderContainer?.classList.add("max-1");
-      } else if (cardPerView === 2) {
-        sliderContainer?.classList.add("max-2");
-      } else if (cardPerView === 3) {
-        sliderContainer?.classList.add("max-3");
-      } else if (cardPerView === 4) {
-        sliderContainer?.classList.add("max-4");
-      } else if (cardPerView >= 5) {
-        sliderContainer?.classList.add("max-5");
-      }
-    };
-    window.addEventListener("resize", onResize);
-
     leftArrow?.addEventListener("click", () => {
       carousel!.scrollLeft -= firstCard.clientWidth;
     });
@@ -202,9 +182,7 @@ function App() {
       {/* NAVBAR */}
       <div className="text-white flex flex-col">
         <nav
-          className={`${
-            scrolled ? "-mt-6" : "lg:-mt-2"
-          } z-50 -mt-6 duration-300`}
+          className={`z-50 -mt-6 duration-300`}
         >
           <div
             className={`px-[12%] md:px-[16%] xl:px-[20%] w-full fixed mx-auto py-12 text-[18px] font-bold duration-300 bg-[#54226b]/90 h-[100px] ${
@@ -252,10 +230,10 @@ function App() {
                     </li>
                     <li className="mx-4">
                       <a
-                        href="#skills"
+                        href="#about"
                         className="hover:text-white duration-300"
                       >
-                        Skills
+                        About
                       </a>
                     </li>
                     <li className="mx-4">
@@ -396,23 +374,37 @@ function App() {
           </div>
         </div>
 
-        {/* SKILLS */}
-        <div className="mt-[48rem]" id="skills">
+        {/* ABOUT */}
+        <div className="mt-[24rem]" id="about">
           <div className="px-[12%] md:px-[16%] xl:px-[20%] mt-48">
-            <span className="text-[54px] font-bold">Skills</span>
-            <div className="h-[1000px]">
-              <Canvas>
+            <span className="text-[54px] font-bold">About</span>
+            <div>
+              <div className="text-lg w-2/3">
+                <p className="italic">Student at the University of Auckland studying Engineering. I was introduced to programming at 12 years old in 2018.
+                Starting with Python, I used crashcourse books, then small projects, and as these projects started stacking up I realised
+                I needed new languages for different tasks. Then came HTML/CSS, JavaScript for web development. Java and Android because I
+                wanted to create a mobile game. TypeScript because all the companies use it, and C++, C#, C along the way. </p>
+                <p className="mt-4 text-base">My most proficient languages include; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">JavaScript</span>, <span className="text-2xl font-bold">TypeScript</span>, <span className="text-xl font-bold">Python</span>, <span className="text-xl font-bold">Java</span>, HTML/CSS.</span>
+                <br/>Languages that I will need more work on include; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">C++</span>, Matlab, Flutter, C#, C.</span>
+                <br/>Some packages that I like using are; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">React</span>, <span className="text-xl font-bold">Tailwind</span>, MUI, OpenAI, etc.</span>
+                <br/>And some tools that I'm experienced with are; <span className="text-[#bdfffd]">MongoDB Atlas/Compass, <span className="text-2xl font-bold">Heroku</span>, <span className="text-xl font-bold">Android Studio</span>, etc.</span></p>
+                <p className="mt-4 text-sm">
+                I'm always on the look-out for new market opportunies for personal projects
+                than can hone my skills and teach me new ones. And currently my main project is a cross-platform flutter app that encourages 
+                users to stay on task, and increase productivity.</p>
+              </div>
+              {/*<Canvas>
                 <OrbitControls />
                 <ambientLight intensity={0.5} />
                 <spotLight position={[10, 15, 10]} angle={0.3} />
                 <Box />
-              </Canvas>
+                  </Canvas>*/}
             </div>
           </div>
         </div>
 
         {/* PROJECTS */}
-        <div id="projects" className="mt-[48rem]">
+        <div id="projects" className="mt-[24rem]">
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <span className="text-[54px] font-bold mt-[32rem]">Projects</span>
             <div className="slider-container transition ease-in-out delay-150">
@@ -426,7 +418,8 @@ function App() {
                   className={`card rounded-[12px] ${
                     cardOneFlipped ? "flipped" : ""
                   }`}
-                  onClick={() => setCardOneFlipped(!cardOneFlipped)}
+                  onClick={() => {setCardOneFlipped(!cardOneFlipped) 
+                  setFirstTimeFlipped(true)}}
                 >
                   <div className="card-border"></div>
                   <div className="card-content py-8 px-10 flex flex-col">
@@ -438,8 +431,13 @@ function App() {
                       Google Play Store with 100+ downloads using Android
                       Studio.
                     </span>
+                    <span className={`absolute bottom-8 right-8 ${firstTimeFlipped ? 'opacity-0' : 'opacity-100'} ease-in-out duration-700`}>
+                      Click to <span className={`magic text-2xl font-bold`}>FLIP</span>
+                    </span>
                   </div>
-                  <div className="card-back">Back of card</div>
+                  <div className="card-back"><span>Language: Java, Android</span>
+                  <span className="mt-4">Google Play:</span><span className="magic text-xl font-bold"><a href="https://play.google.com/store/apps/details?id=com.prestige.prestigegame&hl=en_NZ&gl=US" target="_blank" rel="noreferrer">View</a></span>
+                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/threeheroesandroid" target="_blank" rel="noreferrer">View</a></span></div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
@@ -455,7 +453,8 @@ function App() {
                       Gym and Q-Learning to help itself around any track.
                     </span>
                   </div>
-                  <div className="card-back">Back of card</div>
+                  <div className="card-back"><span>Language: Python, OpenAI</span>
+                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/CarAI" target="_blank" rel="noreferrer">View</a></span></div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
@@ -474,45 +473,67 @@ function App() {
                       animations, etc.
                     </span>
                   </div>
-                  <div className="card-back">Back of card</div>
+                  <div className="card-back"><span>Language: React, TypeScript, CSS</span>
+                  <span className="mt-4">Website:</span><span className="magic text-xl font-bold"><a href="https://www.newtonyuan.com" target="_blank" rel="noreferrer">View</a></span>
+                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/portfolio" target="_blank" rel="noreferrer">View</a></span></div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
-                    cardThreeFlipped ? "flipped" : ""
+                    cardFourFlipped ? "flipped" : ""
                   }`}
-                  onClick={() => setCardThreeFlipped(!cardThreeFlipped)}
+                  onClick={() => setCardFourFlipped(!cardFourFlipped)}
                 >
                   <div className="card-border"></div>
                   <div className="card-content py-8 px-10 flex flex-col">
                     <span className="text-[28px] font-bold">
-                      React TS Website
+                      DiscordJS Bot
                     </span>
                     <span className="mt-4">
-                      Designed and built a personal portfolio website
-                      implementing features such as three.js, smooth-scrolling,
-                      animations, etc.
+                      Bot that records all messages sent in a guild, giving users 
+                      XP and levels along with many other features. Uses MongoDB 
+                      Atlas/Compass and Heroku.
                     </span>
                   </div>
-                  <div className="card-back">Back of card</div>
+                  <div className="card-back"><span>Language: JavaScript, DiscordJS</span>
+                  <span className="mt-4">Documentation:</span><span className="magic text-xl font-bold"><a href="https://docs.google.com/document/d/1anriC1HQ30P0qzUkPs4wpYFZvY1s742uoYUMH57aeIA/edit" target="_blank" rel="noreferrer">View</a></span>
+                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/3amdiscordbot" target="_blank" rel="noreferrer">View</a></span></div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
-                    cardThreeFlipped ? "flipped" : ""
+                    cardFiveFlipped ? "flipped" : ""
                   }`}
-                  onClick={() => setCardThreeFlipped(!cardThreeFlipped)}
+                  onClick={() => setCardFiveFlipped(!cardFiveFlipped)}
                 >
                   <div className="card-border"></div>
                   <div className="card-content py-8 px-10 flex flex-col">
                     <span className="text-[28px] font-bold">
-                      React TS Website
+                      DiscordJS Self-bot
                     </span>
                     <span className="mt-4">
-                      Designed and built a personal portfolio website
-                      implementing features such as three.js, smooth-scrolling,
-                      animations, etc.
+                      Using Eris, this bot tricks discord into thinking it's a user, allowing it to use user commands and interactions.
                     </span>
                   </div>
-                  <div className="card-back">Back of card</div>
+                  <div className="card-back"><span>Language: JavaScript, DiscordJS, Eris</span>
+                  <span className="mt-4">Documentation:</span><span className="magic text-xl font-bold"><a href="https://docs.google.com/document/d/1mjvZU8idNrcoC5DxBD8N2_f-QPq53ir0b5YpQgaiglM/edit" target="_blank" rel="noreferrer">View</a></span>
+                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/selfbotdiscord" target="_blank" rel="noreferrer">View</a></span></div>
+                </div>
+                <div
+                  className={`card rounded-[12px] ml-4 ${
+                    cardSixFlipped ? "flipped" : ""
+                  }`}
+                  onClick={() => setCardSixFlipped(!cardSixFlipped)}
+                >
+                  <div className="card-border"></div>
+                  <div className="card-content py-8 px-10 flex flex-col">
+                    <span className="text-[28px] font-bold">
+                      C++ Miner & Server
+                    </span>
+                    <span className="mt-4">
+                      Client and server hash miner, uses PicoSHA2 and Httplib to send requests and mine until a certain digit of desireable hashes is obtained.
+                    </span>
+                  </div>
+                  <div className="card-back"><span>Language: C++, C, Http</span>
+                 <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/serverclientminer" target="_blank" rel="noreferrer">View</a></span></div>
                 </div>
               </div>
               <img
@@ -524,7 +545,7 @@ function App() {
           </div>
         </div>
 
-        <div id="contact" className="mt-[48rem]">
+        <div id="contact" className="mt-[24rem]">
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <span className="text-[54px] font-bold mt-[24rem]">Contact</span>
             <div className="w-full lg:w-2/3 mt-8">
