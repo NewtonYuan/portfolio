@@ -405,6 +405,10 @@
   color:#282c34;
 }
 
+.last-bar {
+  width: 16%;
+}
+
 @keyframes background-pan {
   from {
     background-position: 0% center;

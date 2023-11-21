@@ -430,7 +430,7 @@ function App() {
               <div className="graph ml-0 lg:ml-12 font-bold text-base lg:text-xl lg:w-1/2 mt-12 lg:mt-0">
                 <div>
                 Python
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[100%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>6 Years</span></div>
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[99.9%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>6 Years</span></div>
                 </div>
                 <div className="mt-2">
                 HTML/CSS
@@ -454,11 +454,11 @@ function App() {
                 </div>
                 <div className="mt-2">
                 React
-                <div className={`w-[20px] graph-bar ${graphShown ? "w-[25%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>1.5 Years</span></div>
+                <div className={`w-[20px] graph-bar ${graphShown ? "w-[25%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-1000`}>1.5 Years</span></div>
                 </div>
-                <div className="mt-2">
+                <div className="mt-2 w-full">
                 TypeScript
-                <div className={`w-[20px] graph-bar ${graphShown ? "w-[16%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>1 Year</span></div>
+                <div className={`w-[17px] graph-bar ${graphShown ? "last-bar" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-1000`}>1 Year</span></div>
                 </div>
               </div>
               {/*<Canvas>
