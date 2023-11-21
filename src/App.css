@@ -98,6 +98,11 @@
   z-index: 1;
 }
 
+.card-back {
+  padding: 20px;
+  text-align: center;
+}
+
 .card > .card-content,
 .card > .card-back {
   background-color: var(--card-color);
@@ -384,6 +389,16 @@
   white-space: nowrap;
 }
 
+.graph-bar {
+  height: 30px;
+  transition: ease-out 1.5s;
+  background-color: #bdfffd;
+  display: flex;
+  justify-content: end;
+  padding-right: 8px;
+  color:#282c34;
+}
+
 @keyframes background-pan {
   from {
     background-position: 0% center;
@@ -399,8 +414,22 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .graph-bar {
+    height: 24px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .card {
     width: calc(100%);
   }
 }
+
+@media screen and (max-width: 480px) {
+  .slider-container {
+    translate: -10%;
+    width: 124%;
+  }
+}
+

@@ -1,7 +1,5 @@
 import "./App.css";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import githubIcon from "./assets/img/github.png";
 import linkedinIcon from "./assets/img/linkedin.svg";
@@ -11,15 +9,8 @@ import javascript from "./assets/img/javascript.png";
 import python from "./assets/img/python.png";
 import java from "./assets/img/java.png";
 import c from "./assets/img/c.png";
-
-function Box() {
-  return (
-    <mesh>
-      <boxBufferGeometry attach="geometry" args={[2, 2, 2]} />
-      <meshLambertMaterial attach="material" color="hotpink" />
-    </mesh>
-  );
-}
+import emailjs from "@emailjs/browser";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
 const SocialIcons = () => {
   return (
@@ -39,6 +30,7 @@ const SocialIcons = () => {
 };
 
 function App() {
+  const form = useRef<HTMLFormElement>(null);
   var windowWidth = window.innerWidth;
   const [scrolled, setScrolled] = useState(false);
   const [hamburgerIsActive, setHamburgerIsActive] = useState(false);
@@ -50,6 +42,10 @@ function App() {
   const [cardFiveFlipped, setCardFiveFlipped] = useState(false);
   const [cardSixFlipped, setCardSixFlipped] = useState(false);
   const [firstTimeFlipped, setFirstTimeFlipped] = useState(false);
+  const [graphShown, setGraphShown] = useState(false);
+  const [buttonText, setButtonText] = useState('Send');
+
+  emailjs.init('dnD5OITSWBgErkcW-')
 
   let dragStart = false,
     prevPageX: number,
@@ -58,6 +54,44 @@ function App() {
   const leftArrow = document.querySelector(".slider-arrow-left");
   const rightArrow = document.querySelector(".slider-arrow-right");
   const firstCard = document.querySelectorAll(".card")[0];
+  const graph = document.querySelector(".graph");
+
+  const handleSubmit = (e) => {
+    if(form.current) {
+      e.preventDefault();
+      setButtonText("Sending...")
+      const formData = new FormData(form.current);
+  
+      // Convert FormData to a plain object
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      emailjs.send('service_5qktbxi', 'template_01810fd', formDataObject)
+      .then (() => {
+        enqueueSnackbar("Message sent! I will try to get back to you when I can! Thanks for reaching out.", {variant: 'success'})
+      }).catch((error) => {
+        enqueueSnackbar("Something went wrong...", {variant: 'error'})
+        console.log(error)
+      })
+      setButtonText("Send")
+    }
+  }
+
+  if (graph) {
+    const observer = new window.IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      setGraphShown(true)
+      return
+    }
+    setGraphShown(false)
+    }, {
+      root: null,
+      threshold: 0.5
+    })
+    observer.observe(graph)
+  }
 
   if (carousel) {
     leftArrow?.addEventListener("click", () => {
@@ -295,13 +329,13 @@ function App() {
         <div className="px-[12%] md:px-[16%] xl:px-[20%] flex flex-col lg:flex-row mt-[14rem] lg:mt-[22rem] lg:justify-between">
           <div className="flex flex-col">
             <span
-              className="text-[54px] font-bold"
+              className="text-[40px] md:text-[54px] font-bold"
               id="nameTitle"
               data-value="Newton Yuan"
             >
               Newton Yuan
             </span>
-            <span className="text-[24px] lg:max-w-[36rem] mt-[18px]">
+            <span className="text-[18px] md:text-[24px] lg:max-w-[36rem] mt-[18px]">
               Full-stack web developer with experience in designing & building
               web apps, cloud hosting & databases, full development lifecycle
               which involves prototyping, trialling, releasing, marketing and
@@ -378,20 +412,54 @@ function App() {
         <div className="mt-[24rem]" id="about">
           <div className="px-[12%] md:px-[16%] xl:px-[20%] mt-48">
             <span className="text-[54px] font-bold">About</span>
-            <div>
-              <div className="text-lg w-2/3">
-                <p className="italic">Student at the University of Auckland studying Engineering. I was introduced to programming at 12 years old in 2018.
-                Starting with Python, I used crashcourse books, then small projects, and as these projects started stacking up I realised
-                I needed new languages for different tasks. Then came HTML/CSS, JavaScript for web development. Java and Android because I
-                wanted to create a mobile game. TypeScript because all the companies use it, and C++, C#, C along the way. </p>
-                <p className="mt-4 text-base">My most proficient languages include; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">JavaScript</span>, <span className="text-2xl font-bold">TypeScript</span>, <span className="text-xl font-bold">Python</span>, <span className="text-xl font-bold">Java</span>, HTML/CSS.</span>
-                <br/>Languages that I will need more work on include; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">C++</span>, Matlab, Flutter, C#, C.</span>
-                <br/>Some packages that I like using are; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">React</span>, <span className="text-xl font-bold">Tailwind</span>, MUI, OpenAI, etc.</span>
-                <br/>And some tools that I'm experienced with are; <span className="text-[#bdfffd]">MongoDB Atlas/Compass, <span className="text-2xl font-bold">Heroku</span>, <span className="text-xl font-bold">Android Studio</span>, etc.</span></p>
+            <div className="flex lg:flex-row flex-col">
+              <div className="text-base md:text-lg w-full lg:w-1/2">
+                <p className="italic">Student at the University of Auckland studying Engineering. I was introduced to programming at 12 years old in early 2018.
+                Starting with Python, my projects started stacking up and I realised I needed new languages for different tasks. 
+                Then came HTML/CSS and JavaScript/Typescript for web development. Java and Android because I
+                wanted to create a mobile game, and C++, C#, C along the way. </p>
+                <p className="mt-4 text-sm md:text-base">My most proficient languages include; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">JavaScript</span>, <span className="text-2xl font-bold">TypeScript</span>, <span className="text-xl font-bold">Python</span>, <span className="text-xl font-bold">Java</span>, HTML/CSS.</span>
+                <br/><br/>Languages that I will need more work on include; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">C++</span>, Matlab, Flutter, C#, C.</span>
+                <br/><br/>Some packages that I like using are; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">React</span>, <span className="text-xl font-bold">Tailwind</span>, MUI, OpenAI, etc.</span>
+                <br/><br/>And some tools that I'm experienced with are; <span className="text-[#bdfffd]">MongoDB Atlas/Compass, <span className="text-2xl font-bold">Heroku</span>, <span className="text-xl font-bold">Android Studio</span>, etc.</span></p>
                 <p className="mt-4 text-sm">
                 I'm always on the look-out for new market opportunies for personal projects
                 than can hone my skills and teach me new ones. And currently my main project is a cross-platform flutter app that encourages 
                 users to stay on task, and increase productivity.</p>
+              </div>
+              <div className="graph ml-0 lg:ml-12 font-bold text-base lg:text-xl lg:w-1/2 mt-12 lg:mt-0">
+                <div>
+                Python
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[100%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>6 Years</span></div>
+                </div>
+                <div className="mt-2">
+                HTML/CSS
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[92%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>5.5 Years</span></div>
+                </div>
+                <div className="mt-2">
+                JavaScript
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[75%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>4.5 Years</span></div>
+                </div>
+                <div className="mt-2">
+                C++
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[42%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>2.5 Years</span></div>
+                </div>
+                <div className="mt-2">
+                Java
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[33%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>2 Years</span></div>
+                </div>
+                <div className="mt-2">
+                Android
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[33%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>2 Years</span></div>
+                </div>
+                <div className="mt-2">
+                React
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[25%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>1.5 Years</span></div>
+                </div>
+                <div className="mt-2">
+                TypeScript
+                <div className={`w-[30px] graph-bar ${graphShown ? "w-[17%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>1 Year</span></div>
+                </div>
               </div>
               {/*<Canvas>
                 <OrbitControls />
@@ -403,8 +471,10 @@ function App() {
           </div>
         </div>
 
+        <div id="projects" className="mt-[12rem]"></div>
+
         {/* PROJECTS */}
-        <div id="projects" className="mt-[24rem]">
+        <div className="mt-[12rem]" >
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <span className="text-[54px] font-bold mt-[32rem]">Projects</span>
             <div className="slider-container transition ease-in-out delay-150">
@@ -547,6 +617,7 @@ function App() {
 
         <div id="contact" className="mt-[24rem]">
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
+            <form ref={form} onSubmit={handleSubmit}>
             <span className="text-[54px] font-bold mt-[24rem]">Contact</span>
             <div className="w-full lg:w-2/3 mt-8">
               <div className="flex flex-row">
@@ -557,7 +628,7 @@ function App() {
                   className="w-1/2 text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
                 ></input>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Email Address"
                   name="email"
                   className="ml-4 w-1/2 text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
@@ -571,11 +642,12 @@ function App() {
                 ></textarea>
               </div>
               <div className="mt-4 download-cv relative duration-500 h-[80%]">
+                <SnackbarProvider />
                 <button className="border py-3 px-12 text-white font-bold text-[18px] z-10">
-                  Send
+                  {buttonText}
                 </button>
               </div>
-            </div>
+            </div></form>
           </div>
         </div>
       </div>
