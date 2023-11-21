@@ -418,10 +418,10 @@ function App() {
                 Starting with Python, my projects started stacking up and I realised I needed new languages for different tasks. 
                 Then came HTML/CSS and JavaScript/Typescript for web development. Java and Android because I
                 wanted to create a mobile game, and C++, C#, C along the way. </p>
-                <p className="mt-4 text-sm md:text-base">My most proficient languages include; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">JavaScript</span>, <span className="text-2xl font-bold">TypeScript</span>, <span className="text-xl font-bold">Python</span>, <span className="text-xl font-bold">Java</span>, HTML/CSS.</span>
-                <br/><br/>Languages that I will need more work on include; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">C++</span>, Matlab, Flutter, C#, C.</span>
-                <br/><br/>Some packages that I like using are; <span className="text-[#bdfffd]"><span className="text-2xl font-bold">React</span>, <span className="text-xl font-bold">Tailwind</span>, MUI, OpenAI, etc.</span>
-                <br/><br/>And some tools that I'm experienced with are; <span className="text-[#bdfffd]">MongoDB Atlas/Compass, <span className="text-2xl font-bold">Heroku</span>, <span className="text-xl font-bold">Android Studio</span>, etc.</span></p>
+                <p className="mt-4 text-sm md:text-base">My most proficient languages include; <br/><span className="text-[#bdfffd]"><span className="text-2xl font-bold">JavaScript</span>, <span className="text-2xl font-bold">TypeScript</span>, <span className="text-xl font-bold">Python</span>, <span className="text-xl font-bold">Java</span>, HTML/CSS.</span>
+                <br/><br/>Languages that I will need more work on include; <br/><span className="text-[#bdfffd]"><span className="text-2xl font-bold">C++</span>, Matlab, Flutter, C#, C.</span>
+                <br/><br/>Some packages that I like using are; <br/><span className="text-[#bdfffd]"><span className="text-2xl font-bold">React</span>, <span className="text-xl font-bold">Tailwind</span>, MUI, OpenAI, etc.</span>
+                <br/><br/>And some tools that I'm experienced with are; <br/><span className="text-[#bdfffd]">MongoDB Atlas/Compass, <span className="text-2xl font-bold">Heroku</span>, <span className="text-xl font-bold">Android Studio</span>, etc.</span></p>
                 <p className="mt-4 text-sm">
                 I'm always on the look-out for new market opportunies for personal projects
                 than can hone my skills and teach me new ones. And currently my main project is a cross-platform flutter app that encourages 
@@ -454,11 +454,11 @@ function App() {
                 </div>
                 <div className="mt-2">
                 React
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[25%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>1.5 Years</span></div>
+                <div className={`w-[20px] graph-bar ${graphShown ? "w-[25%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>1.5 Years</span></div>
                 </div>
                 <div className="mt-2">
                 TypeScript
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[17%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>1 Year</span></div>
+                <div className={`w-[20px] graph-bar ${graphShown ? "w-[16%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>1 Year</span></div>
                 </div>
               </div>
               {/*<Canvas>
