@@ -335,26 +335,6 @@
   width: 102%;
 }
 
-.max-5 {
-  max-width: 1620px;
-}
-
-.max-4 {
-  max-width: 1296px;
-}
-
-.max-3 {
-  max-width: 996px;
-}
-
-.max-2 {
-  max-width: 664px;
-}
-
-.max-1 {
-  max-width: 332px;
-}
-
 .slider {
   overflow-x: auto;
   overflow-y: auto;
@@ -402,7 +382,7 @@
   display: flex;
   justify-content: end;
   padding-right: 8px;
-  color:#282c34;
+  color: #282c34;
 }
 
 .last-bar {
@@ -442,4 +422,3 @@
     width: 124%;
   }
 }
-

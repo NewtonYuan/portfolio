@@ -31,7 +31,6 @@ const SocialIcons = () => {
 
 function App() {
   const form = useRef<HTMLFormElement>(null);
-  var windowWidth = window.innerWidth;
   const [scrolled, setScrolled] = useState(false);
   const [hamburgerIsActive, setHamburgerIsActive] = useState(false);
   const [headerCardsHovered, setHeaderCardsHovered] = useState(false);
@@ -43,54 +42,69 @@ function App() {
   const [cardSixFlipped, setCardSixFlipped] = useState(false);
   const [firstTimeFlipped, setFirstTimeFlipped] = useState(false);
   const [graphShown, setGraphShown] = useState(false);
-  const [buttonText, setButtonText] = useState('Send');
+  const [buttonText, setButtonText] = useState("Send");
 
-  emailjs.init('dnD5OITSWBgErkcW-')
-
-  let dragStart = false,
-    prevPageX: number,
-    prevScrollLeft: number;
   const carousel = document.querySelector(".slider");
   const leftArrow = document.querySelector(".slider-arrow-left");
   const rightArrow = document.querySelector(".slider-arrow-right");
   const firstCard = document.querySelectorAll(".card")[0];
   const graph = document.querySelector(".graph");
 
+  var windowWidth = window.innerWidth;
+  const onResize = () => {
+    windowWidth = window.innerWidth;
+  };
+  window.addEventListener("resize", onResize);
+
+  emailjs.init("dnD5OITSWBgErkcW-");
+
+  let dragStart = false,
+    prevPageX: number,
+    prevScrollLeft: number;
+
   const handleSubmit = (e) => {
-    if(form.current) {
+    if (form.current) {
       e.preventDefault();
-      setButtonText("Sending...")
+      setButtonText("Sending...");
       const formData = new FormData(form.current);
-  
+
       // Convert FormData to a plain object
       const formDataObject = {};
       formData.forEach((value, key) => {
         formDataObject[key] = value;
       });
 
-      emailjs.send('service_5qktbxi', 'template_01810fd', formDataObject)
-      .then (() => {
-        enqueueSnackbar("Message sent! I will try to get back to you when I can! Thanks for reaching out.", {variant: 'success'})
-      }).catch((error) => {
-        enqueueSnackbar("Something went wrong...", {variant: 'error'})
-        console.log(error)
-      })
-      setButtonText("Send")
+      emailjs
+        .send("service_5qktbxi", "template_01810fd", formDataObject)
+        .then(() => {
+          enqueueSnackbar(
+            "Message sent! I will try to get back to you when I can! Thanks for reaching out.",
+            { variant: "success" }
+          );
+        })
+        .catch((error) => {
+          enqueueSnackbar("Something went wrong...", { variant: "error" });
+          console.log(error);
+        });
+      setButtonText("Send");
     }
-  }
+  };
 
   if (graph) {
-    const observer = new window.IntersectionObserver(([entry]) => {
-    if (entry.isIntersecting) {
-      setGraphShown(true)
-      return
-    }
-    setGraphShown(false)
-    }, {
-      root: null,
-      threshold: 0.5
-    })
-    observer.observe(graph)
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setGraphShown(true);
+          return;
+        }
+        setGraphShown(false);
+      },
+      {
+        root: null,
+        threshold: 0.5,
+      }
+    );
+    observer.observe(graph);
   }
 
   if (carousel) {
@@ -215,9 +229,7 @@ function App() {
       <div className="blur" id="blur"></div>
       {/* NAVBAR */}
       <div className="text-white flex flex-col">
-        <nav
-          className={`z-50 -mt-6 duration-300`}
-        >
+        <nav className={`z-50 -mt-6 duration-300`}>
           <div
             className={`px-[12%] md:px-[16%] xl:px-[20%] w-full fixed mx-auto py-12 text-[18px] font-bold duration-300 bg-[#54226b]/90 h-[100px] ${
               scrolled
@@ -242,15 +254,17 @@ function App() {
                     className={`hamburger ${
                       hamburgerIsActive ? "is-active" : ""
                     }`}
-                    onClick={() => setHamburgerIsActive(!hamburgerIsActive)}
+                    onClick={() => {
+                      setHamburgerIsActive(!hamburgerIsActive);
+                    }}
                   >
                     <div className="bar"></div>
                   </button>
                 </span>
               </div>
               <div
-                className={`bg-[#54226b]/90 lg:bg-transparent h-[312px] lg:h-full mt-[18px] lg:mt-0 relative w-[170%] lg:w-auto flex duration-500 lg:left-0 ${
-                  hamburgerIsActive ? "-left-1/3" : "left-[134%]"
+                className={`dropdown bg-[#54226b]/90 lg:bg-transparent h-[312px] lg:h-full mt-[18px] lg:mt-0 absolute top-[82px] w-[170%] lg:w-auto flex duration-500 lg:left-0 ${
+                  hamburgerIsActive ? "-left-[20%]" : `left-[134%]`
                 }`}
               >
                 <div
@@ -414,59 +428,186 @@ function App() {
             <span className="text-[54px] font-bold">About</span>
             <div className="flex lg:flex-row flex-col">
               <div className="text-base md:text-lg w-full lg:w-1/2">
-                <p className="italic">Student at the University of Auckland studying Engineering. I was introduced to programming at 12 years old in early 2018.
-                Starting with Python, my projects started stacking up and I realised I needed new languages for different tasks. 
-                Then came HTML/CSS and JavaScript/Typescript for web development. Java and Android because I
-                wanted to create a mobile game, and C++, C#, C along the way. </p>
-                <p className="mt-4 text-sm md:text-base">My most proficient languages include; <br/><span className="text-[#bdfffd]"><span className="text-2xl font-bold">JavaScript</span>, <span className="text-2xl font-bold">TypeScript</span>, <span className="text-xl font-bold">Python</span>, <span className="text-xl font-bold">Java</span>, HTML/CSS.</span>
-                <br/><br/>Languages that I will need more work on include; <br/><span className="text-[#bdfffd]"><span className="text-2xl font-bold">C++</span>, Matlab, Flutter, C#, C.</span>
-                <br/><br/>Some packages that I like using are; <br/><span className="text-[#bdfffd]"><span className="text-2xl font-bold">React</span>, <span className="text-xl font-bold">Tailwind</span>, MUI, OpenAI, etc.</span>
-                <br/><br/>And some tools that I'm experienced with are; <br/><span className="text-[#bdfffd]">MongoDB Atlas/Compass, <span className="text-2xl font-bold">Heroku</span>, <span className="text-xl font-bold">Android Studio</span>, etc.</span></p>
+                <p className="italic">
+                  Student at the University of Auckland studying Engineering. I
+                  was introduced to programming at 12 years old in early 2018.
+                  Starting with Python, my projects started stacking up and I
+                  realised I needed new languages for different tasks. Then came
+                  HTML/CSS and JavaScript/Typescript for web development. Java
+                  and Android because I wanted to create a mobile game, and C++,
+                  C#, C along the way.{" "}
+                </p>
+                <p className="mt-4 text-sm md:text-base">
+                  My most proficient languages include; <br />
+                  <span className="text-[#bdfffd]">
+                    <span className="text-2xl font-bold">JavaScript</span>,{" "}
+                    <span className="text-2xl font-bold">TypeScript</span>,{" "}
+                    <span className="text-xl font-bold">Python</span>,{" "}
+                    <span className="text-xl font-bold">Java</span>, HTML/CSS.
+                  </span>
+                  <br />
+                  <br />
+                  Languages that I will need more work on include; <br />
+                  <span className="text-[#bdfffd]">
+                    <span className="text-2xl font-bold">C++</span>, Matlab,
+                    Flutter, C#, C.
+                  </span>
+                  <br />
+                  <br />
+                  Some packages that I like using are; <br />
+                  <span className="text-[#bdfffd]">
+                    <span className="text-2xl font-bold">React</span>,{" "}
+                    <span className="text-xl font-bold">Tailwind</span>, MUI,
+                    OpenAI, etc.
+                  </span>
+                  <br />
+                  <br />
+                  And some tools that I'm experienced with are; <br />
+                  <span className="text-[#bdfffd]">
+                    MongoDB Atlas/Compass,{" "}
+                    <span className="text-2xl font-bold">Heroku</span>,{" "}
+                    <span className="text-xl font-bold">Android Studio</span>,
+                    etc.
+                  </span>
+                </p>
                 <p className="mt-4 text-sm">
-                I'm always on the look-out for new market opportunies for personal projects
-                than can hone my skills and teach me new ones. And currently my main project is a cross-platform flutter app that encourages 
-                users to stay on task, and increase productivity.</p>
+                  I'm always on the look-out for new market opportunies for
+                  personal projects than can hone my skills and teach me new
+                  ones. And currently my main project is a cross-platform
+                  flutter app that encourages users to stay on task, and
+                  increase productivity.
+                </p>
               </div>
               <div className="graph ml-0 lg:ml-12 font-bold text-base lg:text-xl lg:w-1/2 mt-12 lg:mt-0">
                 <div>
-                Python
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[99.9%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>6 Years</span></div>
+                  Python
+                  <div
+                    className={`w-[30px] graph-bar ${
+                      graphShown ? "w-[99.9%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-300`}
+                    >
+                      6 Years
+                    </span>
+                  </div>
                 </div>
                 <div className="mt-2">
-                HTML/CSS
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[92%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>5.5 Years</span></div>
+                  HTML/CSS
+                  <div
+                    className={`w-[30px] graph-bar ${
+                      graphShown ? "w-[92%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-300`}
+                    >
+                      5.5 Years
+                    </span>
+                  </div>
                 </div>
                 <div className="mt-2">
-                JavaScript
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[75%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>4.5 Years</span></div>
+                  JavaScript
+                  <div
+                    className={`w-[30px] graph-bar ${
+                      graphShown ? "w-[75%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-300`}
+                    >
+                      4.5 Years
+                    </span>
+                  </div>
                 </div>
                 <div className="mt-2">
-                C++
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[42%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>2.5 Years</span></div>
+                  C++
+                  <div
+                    className={`w-[30px] graph-bar ${
+                      graphShown ? "w-[42%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-300`}
+                    >
+                      2.5 Years
+                    </span>
+                  </div>
                 </div>
                 <div className="mt-2">
-                Java
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[33%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>2 Years</span></div>
+                  Java
+                  <div
+                    className={`w-[30px] graph-bar ${
+                      graphShown ? "w-[33%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-300`}
+                    >
+                      2 Years
+                    </span>
+                  </div>
                 </div>
                 <div className="mt-2">
-                Android
-                <div className={`w-[30px] graph-bar ${graphShown ? "w-[33%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-300`}>2 Years</span></div>
+                  Android
+                  <div
+                    className={`w-[30px] graph-bar ${
+                      graphShown ? "w-[33%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-300`}
+                    >
+                      2 Years
+                    </span>
+                  </div>
                 </div>
                 <div className="mt-2">
-                React
-                <div className={`w-[20px] graph-bar ${graphShown ? "w-[25%]" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-1000`}>1.5 Years</span></div>
+                  React
+                  <div
+                    className={`w-[20px] graph-bar ${
+                      graphShown ? "w-[25%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-1000`}
+                    >
+                      {windowWidth < 480 ? "1.5Y" : "1.5 Years"}
+                    </span>
+                  </div>
                 </div>
                 <div className="mt-2 w-full">
-                TypeScript
-                <div className={`w-[17px] graph-bar ${graphShown ? "last-bar" : ''}`}><span className={`${graphShown ? 'opacity-100' : 'opacity-0'} duration-1000`}>1 Year</span></div>
+                  TypeScript
+                  <div
+                    className={`w-[17px] graph-bar ${
+                      graphShown ? "last-bar" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-1000`}
+                    >
+                      {windowWidth < 480 ? "1Y" : "1 Year"}
+                    </span>
+                  </div>
                 </div>
               </div>
-              {/*<Canvas>
-                <OrbitControls />
-                <ambientLight intensity={0.5} />
-                <spotLight position={[10, 15, 10]} angle={0.3} />
-                <Box />
-                  </Canvas>*/}
             </div>
           </div>
         </div>
@@ -474,7 +615,7 @@ function App() {
         <div id="projects" className="mt-[12rem]"></div>
 
         {/* PROJECTS */}
-        <div className="mt-[12rem]" >
+        <div className="mt-[12rem]">
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <span className="text-[54px] font-bold mt-[32rem]">Projects</span>
             <div className="slider-container transition ease-in-out delay-150">
@@ -488,8 +629,10 @@ function App() {
                   className={`card rounded-[12px] ${
                     cardOneFlipped ? "flipped" : ""
                   }`}
-                  onClick={() => {setCardOneFlipped(!cardOneFlipped) 
-                  setFirstTimeFlipped(true)}}
+                  onClick={() => {
+                    setCardOneFlipped(!cardOneFlipped);
+                    setFirstTimeFlipped(true);
+                  }}
                 >
                   <div className="card-border"></div>
                   <div className="card-content py-8 px-10 flex flex-col">
@@ -501,13 +644,38 @@ function App() {
                       Google Play Store with 100+ downloads using Android
                       Studio.
                     </span>
-                    <span className={`absolute bottom-8 right-8 ${firstTimeFlipped ? 'opacity-0' : 'opacity-100'} ease-in-out duration-700`}>
-                      Click to <span className={`magic text-2xl font-bold`}>FLIP</span>
+                    <span
+                      className={`absolute bottom-8 right-8 ${
+                        firstTimeFlipped ? "opacity-0" : "opacity-100"
+                      } ease-in-out duration-700`}
+                    >
+                      Click to{" "}
+                      <span className={`magic text-2xl font-bold`}>FLIP</span>
                     </span>
                   </div>
-                  <div className="card-back"><span>Language: Java, Android</span>
-                  <span className="mt-4">Google Play:</span><span className="magic text-xl font-bold"><a href="https://play.google.com/store/apps/details?id=com.prestige.prestigegame&hl=en_NZ&gl=US" target="_blank" rel="noreferrer">View</a></span>
-                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/threeheroesandroid" target="_blank" rel="noreferrer">View</a></span></div>
+                  <div className="card-back">
+                    <span>Language: Java, Android</span>
+                    <span className="mt-4">Google Play:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://play.google.com/store/apps/details?id=com.prestige.prestigegame&hl=en_NZ&gl=US"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                    <span className="mt-4">Source Code:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://github.com/NewtonYuan/threeheroesandroid"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                  </div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
@@ -523,8 +691,19 @@ function App() {
                       Gym and Q-Learning to help itself around any track.
                     </span>
                   </div>
-                  <div className="card-back"><span>Language: Python, OpenAI</span>
-                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/CarAI" target="_blank" rel="noreferrer">View</a></span></div>
+                  <div className="card-back">
+                    <span>Language: Python, OpenAI</span>
+                    <span className="mt-4">Source Code:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://github.com/NewtonYuan/CarAI"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                  </div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
@@ -543,9 +722,29 @@ function App() {
                       animations, etc.
                     </span>
                   </div>
-                  <div className="card-back"><span>Language: React, TypeScript, CSS</span>
-                  <span className="mt-4">Website:</span><span className="magic text-xl font-bold"><a href="https://www.newtonyuan.com" target="_blank" rel="noreferrer">View</a></span>
-                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/portfolio" target="_blank" rel="noreferrer">View</a></span></div>
+                  <div className="card-back">
+                    <span>Language: React, TypeScript, CSS</span>
+                    <span className="mt-4">Website:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://www.newtonyuan.com"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                    <span className="mt-4">Source Code:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://github.com/NewtonYuan/portfolio"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                  </div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
@@ -555,18 +754,36 @@ function App() {
                 >
                   <div className="card-border"></div>
                   <div className="card-content py-8 px-10 flex flex-col">
-                    <span className="text-[28px] font-bold">
-                      DiscordJS Bot
-                    </span>
+                    <span className="text-[28px] font-bold">DiscordJS Bot</span>
                     <span className="mt-4">
-                      Bot that records all messages sent in a guild, giving users 
-                      XP and levels along with many other features. Uses MongoDB 
-                      Atlas/Compass and Heroku.
+                      Bot that records all messages sent in a guild, giving
+                      users XP and levels along with many other features. Uses
+                      MongoDB Atlas/Compass and Heroku.
                     </span>
                   </div>
-                  <div className="card-back"><span>Language: JavaScript, DiscordJS</span>
-                  <span className="mt-4">Documentation:</span><span className="magic text-xl font-bold"><a href="https://docs.google.com/document/d/1anriC1HQ30P0qzUkPs4wpYFZvY1s742uoYUMH57aeIA/edit" target="_blank" rel="noreferrer">View</a></span>
-                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/3amdiscordbot" target="_blank" rel="noreferrer">View</a></span></div>
+                  <div className="card-back">
+                    <span>Language: JavaScript, DiscordJS</span>
+                    <span className="mt-4">Documentation:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://docs.google.com/document/d/1anriC1HQ30P0qzUkPs4wpYFZvY1s742uoYUMH57aeIA/edit"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                    <span className="mt-4">Source Code:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://github.com/NewtonYuan/3amdiscordbot"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                  </div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
@@ -580,12 +797,33 @@ function App() {
                       DiscordJS Self-bot
                     </span>
                     <span className="mt-4">
-                      Using Eris, this bot tricks discord into thinking it's a user, allowing it to use user commands and interactions.
+                      Using Eris, this bot tricks discord into thinking it's a
+                      user, allowing it to use user commands and interactions.
                     </span>
                   </div>
-                  <div className="card-back"><span>Language: JavaScript, DiscordJS, Eris</span>
-                  <span className="mt-4">Documentation:</span><span className="magic text-xl font-bold"><a href="https://docs.google.com/document/d/1mjvZU8idNrcoC5DxBD8N2_f-QPq53ir0b5YpQgaiglM/edit" target="_blank" rel="noreferrer">View</a></span>
-                  <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/selfbotdiscord" target="_blank" rel="noreferrer">View</a></span></div>
+                  <div className="card-back">
+                    <span>Language: JavaScript, DiscordJS, Eris</span>
+                    <span className="mt-4">Documentation:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://docs.google.com/document/d/1mjvZU8idNrcoC5DxBD8N2_f-QPq53ir0b5YpQgaiglM/edit"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                    <span className="mt-4">Source Code:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://github.com/NewtonYuan/selfbotdiscord"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                  </div>
                 </div>
                 <div
                   className={`card rounded-[12px] ml-4 ${
@@ -599,11 +837,24 @@ function App() {
                       C++ Miner & Server
                     </span>
                     <span className="mt-4">
-                      Client and server hash miner, uses PicoSHA2 and Httplib to send requests and mine until a certain digit of desireable hashes is obtained.
+                      Client and server hash miner, uses PicoSHA2 and Httplib to
+                      send requests and mine until a certain digit of desireable
+                      hashes is obtained.
                     </span>
                   </div>
-                  <div className="card-back"><span>Language: C++, C, Http</span>
-                 <span className="mt-4">Source Code:</span><span className="magic text-xl font-bold"><a href="https://github.com/NewtonYuan/serverclientminer" target="_blank" rel="noreferrer">View</a></span></div>
+                  <div className="card-back">
+                    <span>Language: C++, C, Http</span>
+                    <span className="mt-4">Source Code:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://github.com/NewtonYuan/serverclientminer"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                  </div>
                 </div>
               </div>
               <img
@@ -618,36 +869,37 @@ function App() {
         <div id="contact" className="mt-[24rem]">
           <div className="px-[12%] md:px-[16%] xl:px-[20%]">
             <form ref={form} onSubmit={handleSubmit}>
-            <span className="text-[54px] font-bold mt-[24rem]">Contact</span>
-            <div className="w-full lg:w-2/3 mt-8">
-              <div className="flex flex-row">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="name"
-                  className="w-1/2 text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
-                ></input>
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  name="email"
-                  className="ml-4 w-1/2 text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
-                ></input>
+              <span className="text-[54px] font-bold mt-[24rem]">Contact</span>
+              <div className="w-full lg:w-2/3 mt-8">
+                <div className="flex flex-row">
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    className="w-1/2 text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
+                  ></input>
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    name="email"
+                    className="ml-4 w-1/2 text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
+                  ></input>
+                </div>
+                <div>
+                  <textarea
+                    placeholder="Message"
+                    name="message"
+                    className="mt-4 h-[120px] w-full text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
+                  ></textarea>
+                </div>
+                <div className="mt-4 download-cv relative duration-500 h-[80%]">
+                  <SnackbarProvider />
+                  <button className="border py-3 px-12 text-white font-bold text-[18px] z-10">
+                    {buttonText}
+                  </button>
+                </div>
               </div>
-              <div>
-                <textarea
-                  placeholder="Message"
-                  name="message"
-                  className="mt-4 h-[120px] w-full text-white bg-white/10 py-4 px-6 rounded-[12px] placeholder:text-white/70 border border-white/30 focus:bg-white transition-all duration-300 focus:text-black"
-                ></textarea>
-              </div>
-              <div className="mt-4 download-cv relative duration-500 h-[80%]">
-                <SnackbarProvider />
-                <button className="border py-3 px-12 text-white font-bold text-[18px] z-10">
-                  {buttonText}
-                </button>
-              </div>
-            </div></form>
+            </form>
           </div>
         </div>
       </div>
