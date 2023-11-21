@@ -183,15 +183,17 @@ function App() {
   }, []);
 
   const handleMouseMove = (e: MouseEvent) => {
-    const blob = document.getElementById("blob");
-    if (blob !== null && windowWidth >= 1024) {
-      blob.animate(
-        {
-          left: `${e.clientX}px`,
-          top: `${e.clientY}px`,
-        },
-        { duration: 3000, fill: "forwards" }
-      );
+    if (windowWidth > 1040) {
+      const blob = document.getElementById("blob");
+      if (blob !== null) {
+        blob.animate(
+          {
+            left: `${e.clientX}px`,
+            top: `${e.clientY}px`,
+          },
+          { duration: 3000, fill: "forwards" }
+        );
+      }
     }
   };
 
@@ -263,7 +265,7 @@ function App() {
                 </span>
               </div>
               <div
-                className={`dropdown bg-[#54226b]/90 lg:bg-transparent h-[312px] lg:h-full mt-[18px] lg:mt-0 absolute top-[82px] w-[170%] lg:w-auto flex duration-500 lg:left-0 ${
+                className={`dropdown bg-[#54226b]/90 lg:bg-transparent h-[312px] lg:h-full mt-[18px] lg:mt-0 absolute top-[82px] lg:relative lg:top-0 w-[170%] lg:w-auto flex duration-500 lg:left-0 ${
                   hamburgerIsActive ? "-left-[20%]" : `left-[134%]`
                 }`}
               >
