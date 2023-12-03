@@ -48,6 +48,7 @@ function App() {
   const leftArrow = document.querySelector(".slider-arrow-left");
   const rightArrow = document.querySelector(".slider-arrow-right");
   const firstCard = document.querySelectorAll(".card")[0];
+  const lastCard = document.querySelectorAll(".card")[5];
   const graph = document.querySelector(".graph");
 
   var windowWidth = window.innerWidth;
@@ -105,6 +106,40 @@ function App() {
       }
     );
     observer.observe(graph);
+  }
+
+  if (firstCard) {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          leftArrow?.classList.add("invisible");
+          return;
+        }
+        leftArrow?.classList.remove("invisible");
+      },
+      {
+        root: null,
+        threshold: 1,
+      }
+    );
+    observer.observe(firstCard);
+  }
+
+  if (lastCard) {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          rightArrow?.classList.add("invisible");
+          return;
+        }
+        rightArrow?.classList.remove("invisible");
+      },
+      {
+        root: null,
+        threshold: 0.95,
+      }
+    );
+    observer.observe(lastCard);
   }
 
   if (carousel) {
