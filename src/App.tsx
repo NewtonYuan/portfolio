@@ -1,6 +1,6 @@
 import "./App.css";
 import { useEffect, useRef, useState } from "react";
-
+import React from "react";
 import githubIcon from "./assets/img/github.png";
 import linkedinIcon from "./assets/img/linkedin.svg";
 import arrowIcon from "./assets/img/arrow.png";
@@ -11,6 +11,7 @@ import java from "./assets/img/java.png";
 import c from "./assets/img/c.png";
 import emailjs from "@emailjs/browser";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
+import resume from "./assets/resume.pdf";
 
 const SocialIcons = () => {
   return (
@@ -48,7 +49,8 @@ function App() {
   const leftArrow = document.querySelector(".slider-arrow-left");
   const rightArrow = document.querySelector(".slider-arrow-right");
   const firstCard = document.querySelectorAll(".card")[0];
-  const lastCard = document.querySelectorAll(".card")[5];
+  const leftMarker = document.querySelector(".left-marker");
+  const rightMarker = document.querySelector(".right-marker");
   const graph = document.querySelector(".graph");
 
   var windowWidth = window.innerWidth;
@@ -108,7 +110,7 @@ function App() {
     observer.observe(graph);
   }
 
-  if (firstCard) {
+  if (leftMarker) {
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -119,13 +121,13 @@ function App() {
       },
       {
         root: null,
-        threshold: 1,
+        threshold: 0.2,
       }
     );
-    observer.observe(firstCard);
+    observer.observe(leftMarker);
   }
 
-  if (lastCard) {
+  if (rightMarker) {
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -136,10 +138,10 @@ function App() {
       },
       {
         root: null,
-        threshold: 0.95,
+        threshold: 0.2,
       }
     );
-    observer.observe(lastCard);
+    observer.observe(rightMarker);
   }
 
   if (carousel) {
@@ -366,9 +368,11 @@ function App() {
                     <SocialIcons />
                   </div>
                   <div className="-ml-40 float-right mt-4 left-40 lg:-mt-[10px] download-cv relative 2xl:left-0 2xl:ml-0 duration-500 2xl:block lg:hidden">
-                    <button className="ml-4 border lg:py-3 lg:px-6 py-4 px-8 text-white lg:text-[14px] text-[18px] z-10">
-                      Download CV
-                    </button>
+                    <a href={resume} download="resume.pdf">
+                      <button className="ml-4 border lg:py-3 lg:px-6 py-4 px-8 text-white lg:text-[14px] text-[18px] z-10">
+                        Download CV
+                      </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -662,6 +666,9 @@ function App() {
                 className="rotate-180 brightness-50 invert w-12 relative top-[220px] slider-arrow-left z-20"
               />
               <div className="slider">
+                <div className={`card-end`}>
+                  <div className="w-2 h-full left-marker"></div>
+                </div>
                 <div
                   className={`card rounded-[12px] ${
                     cardOneFlipped ? "flipped" : ""
@@ -893,6 +900,9 @@ function App() {
                     </span>
                   </div>
                 </div>
+                <div className={`card-end`}>
+                  <div className="w-2 h-full right-marker"></div>
+                </div>
               </div>
               <img
                 src={carouselArrow}
@@ -941,7 +951,7 @@ function App() {
         </div>
       </div>
       <div className="text-center py-10 z-50 mt-[14rem] text-white opacity-80">
-        Copyright 2022. All Rights Reserved. Made by Newton Yuan.
+        Copyright 2022. All Rights Reserved
       </div>
     </div>
   );

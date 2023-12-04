@@ -51,7 +51,6 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   cursor: pointer;
-  height: 380px;
   position: relative;
   transition: transform 1500ms;
   transform-style: preserve-3d;
@@ -61,6 +60,12 @@
   margin-left: 14px;
   white-space: normal;
   max-width: 300px;
+}
+
+.card-end {
+  position: relative;
+  display: inline-block;
+  height: 380px;
 }
 
 .card.flipped {
