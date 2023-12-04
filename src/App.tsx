@@ -667,7 +667,7 @@ function App() {
               />
               <div className="slider">
                 <div className={`card-end`}>
-                  <div className="w-2 h-full left-marker"></div>
+                  <div className="w-2 h-full relative left-[24px] left-marker"></div>
                 </div>
                 <div
                   className={`card rounded-[12px] ${
@@ -901,7 +901,7 @@ function App() {
                   </div>
                 </div>
                 <div className={`card-end`}>
-                  <div className="w-2 h-full right-marker"></div>
+                  <div className="w-2 h-full relative right-[24px] right-marker"></div>
                 </div>
               </div>
               <img
