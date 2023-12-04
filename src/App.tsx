@@ -950,7 +950,7 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="text-center py-10 z-50 mt-[14rem] text-white opacity-80">
+      <div className="text-center py-10 z-50 mt-[8rem] sm:mt-[14rem] text-white opacity-80">
         Copyright 2022. All Rights Reserved
       </div>
     </div>
