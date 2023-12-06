@@ -368,7 +368,7 @@ function App() {
                     <SocialIcons />
                   </div>
                   <div className="-ml-40 float-right mt-4 left-40 lg:-mt-[10px] download-cv relative 2xl:left-0 2xl:ml-0 duration-500 2xl:block lg:hidden">
-                    <a href={resume} download="resume.pdf">
+                    <a href={resume} download="Resume - Newton Yuan.pdf">
                       <button className="ml-4 border lg:py-3 lg:px-6 py-4 px-8 text-white lg:text-[14px] text-[18px] z-10">
                         Download CV
                       </button>
