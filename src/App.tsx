@@ -399,7 +399,7 @@ function App() {
           </div>
 
           {/* Cards */}
-          <div className="mx-auto mt-8 lg:ml-40 3xl:ml-0 3xl:mr-36 lg:mt-8 scale-75 sm:mt-16 sm:scale-90 xl:scale-100">
+          <div className="mx-auto mt-0 lg:ml-40 relative right-4 sm:right-0 3xl:ml-0 3xl:mr-36 lg:mt-8 scale-[40%] sm:mt-16 xs:scale-[60%] sm:scale-[80%] xl:scale-100">
             <div
               onMouseEnter={() => setHeaderCardsHovered(true)}
               onMouseLeave={() => setHeaderCardsHovered(false)}
@@ -950,7 +950,7 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="text-center py-10 z-50 mt-[14rem] text-white opacity-80">
+      <div className="text-center py-10 z-50 mt-[8rem] sm:mt-[14rem] text-white opacity-80">
         Copyright 2022. All Rights Reserved
       </div>
     </div>
