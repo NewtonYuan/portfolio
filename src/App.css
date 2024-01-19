@@ -394,6 +394,11 @@
   width: 16%;
 }
 
+.video {
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
 @keyframes background-pan {
   from {
     background-position: 0% center;

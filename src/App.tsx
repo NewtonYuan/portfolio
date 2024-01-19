@@ -12,6 +12,9 @@ import c from "./assets/img/c.png";
 import emailjs from "@emailjs/browser";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import resume from "./assets/resume.pdf";
+import carai from "./assets/videos/carai.mp4";
+import threeheroes from "./assets/videos/threeheroes.mp4";
+import website from "./assets/videos/website.mp4";
 
 const SocialIcons = () => {
   return (
@@ -698,6 +701,15 @@ function App() {
                     </span>
                   </div>
                   <div className="card-back">
+                    <span>
+                      <video
+                        src={threeheroes}
+                        autoPlay
+                        loop
+                        muted
+                        className="video"
+                      />
+                    </span>
                     <span>Language: Java, Android</span>
                     <span className="mt-4">Google Play:</span>
                     <span className="magic text-xl font-bold">
@@ -736,6 +748,15 @@ function App() {
                     </span>
                   </div>
                   <div className="card-back">
+                    <span>
+                      <video
+                        src={carai}
+                        autoPlay
+                        loop
+                        muted
+                        className="video"
+                      />
+                    </span>
                     <span>Language: Python, OpenAI</span>
                     <span className="mt-4">Source Code:</span>
                     <span className="magic text-xl font-bold">
@@ -767,6 +788,15 @@ function App() {
                     </span>
                   </div>
                   <div className="card-back">
+                    <span>
+                      <video
+                        src={website}
+                        autoPlay
+                        loop
+                        muted
+                        className="video"
+                      />
+                    </span>
                     <span>Language: React, TypeScript, CSS</span>
                     <span className="mt-4">Website:</span>
                     <span className="magic text-xl font-bold">
