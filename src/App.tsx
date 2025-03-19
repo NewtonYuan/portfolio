@@ -44,6 +44,8 @@ function App() {
   const [cardFourFlipped, setCardFourFlipped] = useState(false);
   const [cardFiveFlipped, setCardFiveFlipped] = useState(false);
   const [cardSixFlipped, setCardSixFlipped] = useState(false);
+  const [cardUnrealFlipped, setCardUnrealFlipped] = useState(false);
+  const [cardEightFlipped, setCardEightFlipped] = useState(false);
   const [firstTimeFlipped, setFirstTimeFlipped] = useState(false);
   const [graphShown, setGraphShown] = useState(false);
   const [buttonText, setButtonText] = useState("Send");
@@ -535,7 +537,7 @@ function App() {
                         graphShown ? "opacity-100" : "opacity-0"
                       } duration-300`}
                     >
-                      6 Years
+                      7 Years
                     </span>
                   </div>
                 </div>
@@ -543,7 +545,23 @@ function App() {
                   HTML/CSS
                   <div
                     className={`w-[30px] graph-bar ${
-                      graphShown ? "w-[92%]" : ""
+                      graphShown ? "w-[93%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-300`}
+                    >
+                      6.5 Years
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-2">
+                  JavaScript
+                  <div
+                    className={`w-[30px] graph-bar ${
+                      graphShown ? "w-[79%]" : ""
                     }`}
                   >
                     <span
@@ -556,26 +574,10 @@ function App() {
                   </div>
                 </div>
                 <div className="mt-2">
-                  JavaScript
-                  <div
-                    className={`w-[30px] graph-bar ${
-                      graphShown ? "w-[75%]" : ""
-                    }`}
-                  >
-                    <span
-                      className={`${
-                        graphShown ? "opacity-100" : "opacity-0"
-                      } duration-300`}
-                    >
-                      4.5 Years
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-2">
                   C++
                   <div
                     className={`w-[30px] graph-bar ${
-                      graphShown ? "w-[42%]" : ""
+                      graphShown ? "w-[50%]" : ""
                     }`}
                   >
                     <span
@@ -583,7 +585,7 @@ function App() {
                         graphShown ? "opacity-100" : "opacity-0"
                       } duration-300`}
                     >
-                      2.5 Years
+                      3.5 Years
                     </span>
                   </div>
                 </div>
@@ -591,7 +593,7 @@ function App() {
                   Java
                   <div
                     className={`w-[30px] graph-bar ${
-                      graphShown ? "w-[33%]" : ""
+                      graphShown ? "w-[43%]" : ""
                     }`}
                   >
                     <span
@@ -599,23 +601,7 @@ function App() {
                         graphShown ? "opacity-100" : "opacity-0"
                       } duration-300`}
                     >
-                      2 Years
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  Android
-                  <div
-                    className={`w-[30px] graph-bar ${
-                      graphShown ? "w-[33%]" : ""
-                    }`}
-                  >
-                    <span
-                      className={`${
-                        graphShown ? "opacity-100" : "opacity-0"
-                      } duration-300`}
-                    >
-                      2 Years
+                      3 Years
                     </span>
                   </div>
                 </div>
@@ -623,7 +609,7 @@ function App() {
                   React
                   <div
                     className={`w-[20px] graph-bar ${
-                      graphShown ? "w-[25%]" : ""
+                      graphShown ? "w-[36%]" : ""
                     }`}
                   >
                     <span
@@ -631,7 +617,7 @@ function App() {
                         graphShown ? "opacity-100" : "opacity-0"
                       } duration-1000`}
                     >
-                      {windowWidth < 480 ? "1.5Y" : "1.5 Years"}
+                      {windowWidth < 480 ? "2.5Y" : "2.5 Years"}
                     </span>
                   </div>
                 </div>
@@ -639,7 +625,7 @@ function App() {
                   TypeScript
                   <div
                     className={`w-[17px] graph-bar ${
-                      graphShown ? "last-bar" : ""
+                      graphShown ? "w-[27%]" : ""
                     }`}
                   >
                     <span
@@ -647,7 +633,39 @@ function App() {
                         graphShown ? "opacity-100" : "opacity-0"
                       } duration-1000`}
                     >
-                      {windowWidth < 480 ? "1Y" : "1 Year"}
+                      {windowWidth < 480 ? "2Y" : "2 Years"}
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-2 w-full">
+                  C#
+                  <div
+                    className={`w-[17px] graph-bar ${
+                      graphShown ? "w-[21%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-1000`}
+                    >
+                      1.5Y
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-2 w-full">
+                  C
+                  <div
+                    className={`w-[17px] graph-bar ${
+                      graphShown ? "w-[21%]" : ""
+                    }`}
+                  >
+                    <span
+                      className={`${
+                        graphShown ? "opacity-100" : "opacity-0"
+                      } duration-1000`}
+                    >
+                      1.5Y
                     </span>
                   </div>
                 </div>
@@ -731,6 +749,28 @@ function App() {
                         View
                       </a>
                     </span>
+                  </div>
+                </div>
+                <div
+                  className={`card rounded-[12px] ml-4 ${
+                    cardUnrealFlipped ? "flipped" : ""
+                  }`}
+                  onClick={() => setCardUnrealFlipped(!cardUnrealFlipped)}
+                >
+                  <div className="card-border"></div>
+                  <div className="card-content py-8 px-10 flex flex-col">
+                    <span className="text-[28px] font-bold">
+                      Unreal Engine Game
+                    </span>
+                    <span className="mt-4">
+                      Working with a small team of digital designers to create a
+                      game using Unreal Engine Blueprints. At the early stage of
+                      creating a demo.
+                    </span>
+                  </div>
+                  <div className="card-back">
+                    <span>Language: Unreal, C, Blueprints</span>
+                    <span className="mt-4">Source code undisclosable.</span>
                   </div>
                 </div>
                 <div
@@ -930,6 +970,37 @@ function App() {
                     </span>
                   </div>
                 </div>
+                <div
+                  className={`card rounded-[12px] ml-4 ${
+                    cardEightFlipped ? "flipped" : ""
+                  }`}
+                  onClick={() => setCardEightFlipped(!cardEightFlipped)}
+                >
+                  <div className="card-border"></div>
+                  <div className="card-content py-8 px-10 flex flex-col">
+                    <span className="text-[28px] font-bold">
+                      Flutter Application
+                    </span>
+                    <span className="mt-4">
+                      Created a flutter mobile application to understand how
+                      cross-platform mobile development looks like. (Yet to be
+                      publicly released)
+                    </span>
+                  </div>
+                  <div className="card-back">
+                    <span>Language: Flutter, Dart</span>
+                    <span className="mt-4">Source Code:</span>
+                    <span className="magic text-xl font-bold">
+                      <a
+                        href="https://github.com/NewtonYuan/mystarship"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View
+                      </a>
+                    </span>
+                  </div>
+                </div>
                 <div className={`card-end`}>
                   <div className="w-2 h-full relative right-[24px] right-marker"></div>
                 </div>
@@ -981,7 +1052,7 @@ function App() {
         </div>
       </div>
       <div className="text-center py-10 z-50 mt-[8rem] sm:mt-[14rem] text-white opacity-80">
-        Copyright 2022. All Rights Reserved
+        Copyright 2025. All Rights Reserved
       </div>
     </div>
   );
